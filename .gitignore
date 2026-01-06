@@ -36,3 +36,6 @@ viz_*/
 .vscode/
 .idea/
 .DS_Store (Mac)
+
+# explicacion interna de como iniciar la sesion spark del proyecto
+configuracion_spark_explicacion.md
