@@ -120,7 +120,7 @@ carbon-emissions-pipeline/
 ├── main.py                    # Script principal (Orquestador del pipeline)
 ├── requirements.txt           # Dependencias de Python
 └── README.md                  # Documentación profesional
-
+```
 
 ---
 **Desarrollado por [Douglas Guzmán](https://github.com/DDGUZMANO)** - Proyecto de Ingeniería de Datos con enfoque en Sostenibilidad y Arquitectura Medallion.
