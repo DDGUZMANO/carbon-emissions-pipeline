@@ -3,6 +3,7 @@
 ![Python](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Apache Spark](https://img.shields.io/badge/Apache_Spark-3.4.0-orange.svg)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.32-ff4b4b.svg)
 ![Architecture](https://img.shields.io/badge/Architecture-Medallion-green.svg)
 
 Este proyecto implementa un pipeline de datos **End-to-End** para analizar las emisiones de carbono globales y su relación con el crecimiento económico (PIB/GDP). Utiliza una **Arquitectura Medallion** procesada con **PySpark** y desplegada íntegramente mediante contenedores **Docker**.
@@ -24,30 +25,53 @@ El pipeline se divide en tres capas lógicas para asegurar la integridad, calida
 * **Lenguaje:** Python 3.11
 * **Motor de Procesamiento:** PySpark (Spark Engine 3.4.0)
 * **Infraestructura:** Docker & Docker Compose
-* **Librerías de Visualización:** Plotly Express (Mapas animados), Seaborn y Matplotlib.
+* **Visualización:** Streamlit & Plotly Express (Mapas de calor y gráficos dinámicos).
+* **Lectura eficiente de parquet desde Spark a Pandas:** Pyarrow.
 * **Entorno de Ejecución:** Java 11 (OpenJDK) para máxima estabilidad con Spark.
+* **Almacenamiento:** Formato Parquet (columnar) para alta eficiencia.
 
 ## 🚀 Cómo Ejecutar
 Este proyecto está completamente **dockerizado**, eliminando la necesidad de instalar Spark, Java o Hadoop localmente.
+
+### Opción 1: Ejecución con Docker (Recomendado)
+Ideal para evitar configuraciones locales de Spark o Java.
+
+### Requisitos Previos
+* Docker y Docker Compose instalados.
 
 1.  **Clonar el repositorio:**
     ```bash
     git clone [https://github.com/DDGUZMANO/carbon-emissions-pipeline.git](https://github.com/DDGUZMANO/carbon-emissions-pipeline.git)
     cd carbon-emissions-pipeline
     ```
+
 2.  **Lanzar el entorno:**
     ```bash
     docker-compose up --build
     ```
-3.  **Resultados:** Los reportes aparecerán automáticamente en la raíz de tu proyecto:
-    * `viz_animacion_global.html` (Mapa interactivo temporal)
-    * `carbon_trends_plot.png` (Gráfico de tendencias estático)
-    * `dashboard_regiones_interactivo.html` (Análisis comparativo)
+3. **Acceso:** * El pipeline procesará las capas Medallion automáticamente.
+    * Una vez finalizado, accede al Dashboard interactivo en: `http://localhost:8501`
+
+### Opción 2: Ejecución Local (Manual)
+
+1.  **Instalar dependencias:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+2.  **Ejecutar el pipeline:**
+    ```bash
+    python main.py
+    ```
+3. **Lanzar el dashboard:**
+    ```bash
+    streamlit run app_dashboard.py
+    ```
 
 ## 🧠 Decisiones de Ingeniería
-* **Dockerización:** Uso de volúmenes y redes aisladas para garantizar la portabilidad total entre Windows, macOS y Linux.
-* **Java 11 sobre 17:** Decisión técnica basada en la estabilidad del Garbage Collector de la JVM y la compatibilidad de acceso a memoria de Spark.
-* **Almacenamiento en Parquet:** Uso de almacenamiento columnar en las capas intermedias para optimizar el rendimiento de las consultas y reducir el almacenamiento.
+* **Optimización de Visualización:** Implementación de escala de colores basada en el **percentil 95** para mitigar el efecto de outliers en el mapa global.
+* **Normalización de Índices:** Uso de **Base 100** en análisis de tendencias para comparar el crecimiento porcentual del PIB frente a la intensidad de carbono.
+* **Dockerización:** Uso de volúmenes y redes aisladas para garantizar la portabilidad total entre entornos.
+* **Java 11 sobre 17:** Decisión técnica basada en la estabilidad del Garbage Collector de la JVM y la compatibilidad con Spark 3.4.
 
 ## 📊 Análisis de Resultados y Conclusiones
 
@@ -92,6 +116,11 @@ carbon-emissions-pipeline/
 │   └── common/                # Configuraciones compartidas (Spark, utilidades)
 ├── Dockerfile                 # Definición de la imagen (Python + Java 11)
 ├── docker-compose.yml         # Orquestación de servicios
+├── app_dashboard.py           # Dashboard interactivo final (Streamlit)
 ├── main.py                    # Script principal (Orquestador del pipeline)
 ├── requirements.txt           # Dependencias de Python
 └── README.md                  # Documentación profesional
+
+
+---
+**Desarrollado por [Douglas Guzmán](https://github.com/DDGUZMANO)** - Proyecto de Ingeniería de Datos con enfoque en Sostenibilidad y Arquitectura Medallion.

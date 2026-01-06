@@ -17,4 +17,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
-CMD ["python", "main.py"]
+# EXPOSICIÓN DEL PUERTO DE STREAMLIT
+EXPOSE 8501
+
+# Comando: Primero procesa los datos (Spark) y LUEGO lanza el Dashboard
+CMD ["sh", "-c", "python main.py && streamlit run app_dashboard.py --server.port=8501 --server.address=0.0.0.0"]
