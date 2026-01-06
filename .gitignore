@@ -1,0 +1,38 @@
+# Entornos virtuales
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Spark / Hadoop / Logs
+derby.log
+metastore_db/
+spark-warehouse/
+*.log
+spark-temp/
+__pycache__/
+
+# Datos y resultados (para que el repo sea ligero)
+data/
+*.html
+
+
+# Resultados de visualización
+*.html
+
+*.jpg
+*.jpeg
+viz_*/
+
+# Docker
+.docker/
+
+# Configuración de editor
+.vscode/
+.idea/
+.DS_Store (Mac)
