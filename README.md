@@ -32,7 +32,7 @@ Este proyecto está completamente **dockerizado**, eliminando la necesidad de in
 
 1.  **Clonar el repositorio:**
     ```bash
-    git clone [https://github.com/tu-usuario/carbon-emissions-pipeline.git](https://github.com/tu-usuario/carbon-emissions-pipeline.git)
+    git clone [https://github.com/DDGUZMANO/carbon-emissions-pipeline.git](https://github.com/DDGUZMANO/carbon-emissions-pipeline.git)
     cd carbon-emissions-pipeline
     ```
 2.  **Lanzar el entorno:**
@@ -83,16 +83,15 @@ El análisis muestra una tendencia clara de **desacoplamiento** en economías av
 
 ```text
 carbon-emissions-pipeline/
-├── data/                   # Datos organizados por capas (Medallion)
-│   ├── bronze/             # Datos crudos (Raw)
-│   ├── silver/             # Datos limpios y tipados
-│   └── gold/               # Agregaciones de negocio
-├── scripts/                # Scripts de procesamiento PySpark
-│   ├── bronze_layer.py
-│   ├── silver_layer.py
-│   └── gold_layer.py
-├── visualizations/         # Lógica de generación de reportes
-├── Dockerfile              # Configuración de imagen (Python + Java 11)
-├── docker-compose.yml      # Orquestación de contenedores
-├── main.py                 # Punto de entrada del pipeline
-└── README.md               # Documentación
+├── img/                       # Capturas de pantalla y visualizaciones para el portfolio
+├── src/                       # Código fuente modular
+│   ├── ingestion/             # Capa Bronze: Extracción de datos (OWID)
+│   ├── transformation/        # Capas Silver y Gold: Procesamiento y lógica de negocio
+│   ├── analysis/              # Insights adicionales y métricas específicas
+│   ├── visualizations/        # Generación de gráficos y dashboards interactivos
+│   └── common/                # Configuraciones compartidas (Spark, utilidades)
+├── Dockerfile                 # Definición de la imagen (Python + Java 11)
+├── docker-compose.yml         # Orquestación de servicios
+├── main.py                    # Script principal (Orquestador del pipeline)
+├── requirements.txt           # Dependencias de Python
+└── README.md                  # Documentación profesional
