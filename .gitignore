@@ -18,8 +18,8 @@ spark-temp/
 __pycache__/
 
 # Datos y resultados (para que el repo sea ligero)
-data/
-*.html
+# data/
+# *.html
 
 
 # Resultados de visualización
